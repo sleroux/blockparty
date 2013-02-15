@@ -1,4 +1,7 @@
 Blockparty::Application.routes.draw do
+  resources :subscribers
+
+
   # REST API Mount
   mount Blockparty::API => "/"
 
