@@ -24,13 +24,13 @@ class Query < ActiveRecord::Base
         block_list_server.mail_servers << mail_server
       else
         result.code = QueryResult::NOT_LISTED
-        block_list_server.mail_servers.delete(mail_server) if block_list_server.mail_servers.include?(mail_server)
+        block_list_server.mail_servers.delete(mail_server)
       end
     rescue Dnsruby::ResolvError
       # if NXDOMAIN (not listed)
       puts "not listed"
       result.code = QueryResult::NOT_LISTED
-      block_list_server.mail_servers.delete(mail_server) if block_list_server.mail_servers.include?(mail_server)
+      block_list_server.mail_servers.delete(mail_server)
     rescue Dnsruby::ResolvTimeout
       # if Timeout error
       puts "timeout"
