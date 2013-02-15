@@ -11,13 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130215034139) do
+ActiveRecord::Schema.define(:version => 20130215174823) do
 
   create_table "block_list_servers", :force => true do |t|
     t.string   "name"
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "block_list_servers_mail_servers", :id => false, :force => true do |t|
+    t.integer "mail_server_id"
+    t.integer "block_list_server_id"
   end
 
   create_table "delayed_jobs", :force => true do |t|

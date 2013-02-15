@@ -4,6 +4,7 @@ class Query < ActiveRecord::Base
   belongs_to :mail_server
   belongs_to :block_list_server
   has_many :query_results
+
   def perform
     result = query_results.create(:code => QueryResult::INIT)
     result.code = QueryResult::INIT
@@ -19,13 +20,17 @@ class Query < ActiveRecord::Base
         puts "query response: #{response.answer.to_s}"
         result.code = QueryResult::LISTED
         result.response = response.answer.to_s
+
+        block_list_server.mail_servers << mail_server
       else
         result.code = QueryResult::NOT_LISTED
+        block_list_server.mail_servers.delete(mail_server) if block_list_server.mail_servers.include?(mail_server)
       end
     rescue Dnsruby::ResolvError
       # if NXDOMAIN (not listed)
       puts "not listed"
       result.code = QueryResult::NOT_LISTED
+      block_list_server.mail_servers.delete(mail_server) if block_list_server.mail_servers.include?(mail_server)
     rescue Dnsruby::ResolvTimeout
       # if Timeout error
       puts "timeout"

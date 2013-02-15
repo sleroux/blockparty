@@ -1,5 +1,6 @@
 Blockparty::Application.routes.draw do
-
+  # REST API Mount
+  mount Blockparty::API => "/"
 
   match "queries/all" => "queries#all"
   resources :queries

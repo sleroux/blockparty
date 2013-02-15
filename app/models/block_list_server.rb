@@ -1,6 +1,8 @@
 class BlockListServer < ActiveRecord::Base
   attr_accessible :name, :url
   has_many :queries
+  has_and_belongs_to_many :mail_servers
+
   validates_presence_of :name, :url
   validates :url, :format => { :with => URI::regexp(%w(http https)), :message => "Must be a valid IP address with scheme"}
 
