@@ -4,6 +4,12 @@ module Blockparty
     version 'v1'
     format :json
 
+    resource :block_list_servers do
+      get do
+        BlockListServer.all
+      end
+    end
+
     resource :mail_servers do
       get do
         MailServer.all
