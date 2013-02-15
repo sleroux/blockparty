@@ -13,6 +13,7 @@ gem 'dnsruby'
 gem 'delayed_job_active_record'
 
 gem 'grape'
+gem 'whenever'
 
 # Gems used only for assets and not required
 # in production environments by default.
